@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Linux ke liye FFmpeg install karna aur system dependencies update rakhna
 RUN apt-get update && apt-get install -y ffmpeg curl && rm -rf /var/lib/apt/lists/*
