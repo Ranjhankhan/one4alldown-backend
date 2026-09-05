@@ -66,12 +66,13 @@ class SocialDownloaderLib:
         ydl_opts = {
     'format': 'best',
     'noplaylist': True,
+    # YouTube ke bot-detection ko bypass karne ke liye Android aur TV client use karein (No cookies needed)
     'extractor_args': {
         'youtube': {
-            'player_client': ['android', 'web'],
+            'player_client': ['android', 'tv', 'web'],
         }
     },
-    'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'socket_timeout': 30,
 }
         
         try:
