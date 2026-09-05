@@ -1,17 +1,23 @@
-﻿import os
+import os
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, JSONResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from social_dl_lib import SocialDownloaderLib
 import urllib.parse
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="."), name="static")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
-    return FileResponse("Index.html")
+    return {"status": "One4Alldown Backend is active and running!"}
 
 @app.get("/download")
 def download_info(url: str):
@@ -74,4 +80,4 @@ def download_video(url: str, quality: str = "720p"):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
