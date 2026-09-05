@@ -64,16 +64,15 @@ class SocialDownloaderLib:
                 progress_callback(92, "converting")
 
         ydl_opts = {
-            'format': 'bestaudio[ext=m4a]/bestaudio/best',
-            'outtmpl': os.path.join(output_dir, '%(id)s.%(ext)s'),
-            'quiet': True,
-            'progress_hooks': [my_hook],
-            'extractor_args': {
-                'youtube': {
-                    'player_client': ['ios', 'web', 'android']
-                }
-            }
+    'format': 'best',
+    # YouTube bot detection se bachne ke liye client arguments add karein
+    'extractor_args': {
+        'youtube': {
+            'player_client': ['android', 'web']
         }
+    },
+    # Baqi aapki purani options yahan rahengi
+}
         
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
