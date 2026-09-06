@@ -1,5 +1,5 @@
 fastapi
 uvicorn
 requests
-yt-dlp>=2024.03.10
+yt-dlp
 ffmpeg-python
