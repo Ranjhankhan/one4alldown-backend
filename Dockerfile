@@ -1,12 +1,12 @@
 FROM python:3.11-slim
 
-# Linux ke liye FFmpeg install karna aur system dependencies update rakhna
 RUN apt-get update && apt-get install -y ffmpeg curl && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY requirements.txt .
-# yt-dlp aur baqi libraries ko hamesha latest version par update karne ke liye --upgrade use kiya hai
+# Yeh line yt-dlp ko hamesha latest version par update karegi
+RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN pip install --no-cache-dir --upgrade yt-dlp
 
