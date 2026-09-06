@@ -142,16 +142,18 @@ class SocialDownloaderLib:
 
         height_num = quality.replace('p', '')
         ydl_opts = {
-            'format': f'bestvideo[height<={height_num}]+bestaudio/best[height<={height_num}]/best',
-            'outtmpl': os.path.join(output_dir, '%(id)s.%(ext)s'),
-            'quiet': True,
-            'progress_hooks': [my_hook],
-            'extractor_args': {
-                'youtube': {
-                    'player_client': ['ios', 'web', 'android']
-                }
-            }
+    'format': 'best',
+    'noplaylist': True,
+    # YouTube ke bot-check aur player response error ko bypass karne ke liye Embedded aur TV clients
+    'extractor_args': {
+        'youtube': {
+            'player_client': ['tv_embedded', 'android', 'web'],
         }
+    },
+    'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'socket_timeout': 30,
+}
+
         
         if ffmpeg_path:
             ydl_opts['ffmpeg_location'] = ffmpeg_path
